@@ -195,7 +195,6 @@ public abstract class ${superClassName} extends ${baseClassName} {
     }
 #end
 
-
 #end
 ##
 ##callback methods
@@ -203,49 +202,34 @@ public abstract class ${superClassName} extends ${baseClassName} {
     protected abstract void ${cbname}();
 
 #end
-
 ## fetch methods
+#set( $pluralCapitalizedName = $stringUtils.pluralize($stringUtils.capitalized($object.name)) )
 	@SuppressWarnings("unchecked")
-	public static java.util.List<${subClassName}> fetchAll( ObjectContext oc ) {
+	public static java.util.List<${subClassName}> fetchAll${pluralCapitalizedName}( ObjectContext oc ) {
 		SelectQuery q = new SelectQuery( ${subClassName}.class );
   		return oc.performQuery( q );
  	}
  	
 	@SuppressWarnings("unchecked")
- 	public static java.util.List<${subClassName}> fetch( ObjectContext oc, Expression expression ) {
+ 	public static java.util.List<${subClassName}> fetch${pluralCapitalizedName}( ObjectContext oc, Expression expression ) {
   		SelectQuery q = new SelectQuery( ${subClassName}.class, expression );
   		return oc.performQuery( q );
  	}
 
 	@SuppressWarnings("unchecked")
- 	public static java.util.List<${subClassName}> fetch( ObjectContext oc, Expression expression, java.util.List<Ordering> orderings ) {
-  		SelectQuery q = new SelectQuery( ${subClassName}.class, expression );
-
-  		if ( orderings != null ) {
-   			for( Ordering ordering : orderings ) {
-    			q.addOrdering( ordering );
-   			}
-  		}
-
+ 	public static java.util.List<${subClassName}> fetch${pluralCapitalizedName}( ObjectContext oc, Expression expression, java.util.List<Ordering> orderings ) {
+  		SelectQuery q = new SelectQuery( ${subClassName}.class, expression, orderings );
   		return oc.performQuery( q );
  	}
  	
  	@SuppressWarnings("unchecked")
- 	public static java.util.List<${subClassName}> fetchAll( ObjectContext oc, java.util.List<Ordering> orderings ) {
-  		SelectQuery q = new SelectQuery( ${subClassName}.class);
-
-  		if ( orderings != null ) {
-   			for( Ordering ordering : orderings ) {
-    			q.addOrdering( ordering );
-   			}
-  		}
-
+ 	public static java.util.List<${subClassName}> fetchAll${pluralCapitalizedName}( ObjectContext oc, java.util.List<Ordering> orderings ) {
+  		SelectQuery q = new SelectQuery( ${subClassName}.class, null, orderings);
   		return oc.performQuery( q );
  	}
  	
- 	
-	public static ${subClassName} fetchOne(ObjectContext oc, Expression expression) {
-		java.util.List<${subClassName}> objects = fetch(oc, expression);
+	public static ${subClassName} fetch${stringUtils.capitalized($object.name)}(ObjectContext oc, Expression expression) {
+		java.util.List<${subClassName}> objects = fetch${pluralCapitalizedName}(oc, expression);
 		${subClassName} obj;
 		int count = objects.size();
 		if (count == 0) {
