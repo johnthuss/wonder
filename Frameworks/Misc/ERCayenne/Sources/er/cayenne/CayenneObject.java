@@ -169,8 +169,19 @@ public class CayenneObject extends CayenneDataObject implements NSKeyValueCoding
 		}
 	}
 
-	public CayenneObject localInstanceIn(ObjectContext context) {
-		return context.localObject(this);
+	public <T extends CayenneObject> T localInstanceIn(ObjectContext context) {
+		return (T) context.localObject(this);
+	}
+	
+	public void delete() {
+		if (getObjectContext() != null) {
+			getObjectContext().deleteObjects(this);
+		}
+	}
+	
+	public boolean isNewObject() {
+		if (getObjectContext() == null) return true;
+		return getPersistenceState() == PersistenceState.NEW;
 	}
 	
 }

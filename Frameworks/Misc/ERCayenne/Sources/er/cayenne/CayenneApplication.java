@@ -4,6 +4,7 @@ package er.cayenne;
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.configuration.server.ServerRuntime;
 
+import com.webobjects.appserver.WOApplication;
 import com.webobjects.appserver.WORequest;
 import com.webobjects.appserver.WOResponse;
 
@@ -16,6 +17,10 @@ import er.extensions.appserver.ERXApplication;
  *
  */
 public abstract class CayenneApplication extends ERXApplication {
+	
+	public static CayenneApplication application() {
+		return (CayenneApplication)WOApplication.application();
+	}
 	
 	private ServerRuntime runtime;
 	

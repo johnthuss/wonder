@@ -94,13 +94,13 @@ public abstract class ${superClassName} extends ${baseClassName} {
 #end
 #end
 
-	public static $subClassName create${stringUtils.capitalized($subClassName)}(ObjectContext ec
-#foreach( $attr in ${object.DeclaredAttributes} )
-#if ($attr.mandatory)
-		, $importUtils.formatJavaType(${attr.Type}) $attr.name
+	public static $subClassName create${stringUtils.capitalized($subClassName)}(ObjectContext ec#foreach( $attr in ${object.DeclaredAttributes} )
+#if ($attr.mandatory), $importUtils.formatJavaType(${attr.Type}) $attr.name
 #end
 #end
-	) {
+#foreach ( $rel in $object.DeclaredRelationships )
+#if ($rel.mandatory && !$rel.ToMany && !$rel.toDependentEntity), $importUtils.formatJavaType(${rel.TargetEntity.ClassName}) ${rel.Name}#end
+#end) {
 		$subClassName result = new $subClassName();
 		ec.registerNewObject(result);
 #foreach( $attr in ${object.DeclaredAttributes} )
@@ -110,7 +110,19 @@ public abstract class ${superClassName} extends ${baseClassName} {
 #end
 		return result;
 	}
-	
+
+	public static $subClassName localInstanceIn(ObjectContext editingContext, $subClassName eo) {
+		return eo.localInstanceIn(editingContext);
+	}
+
+	public $subClassName localInstanceIn(ObjectContext editingContext) {
+		$subClassName localInstance = ($subClassName)super.localInstanceIn(editingContext);
+		if (localInstance == null) {
+			throw new IllegalStateException("You attempted to localInstance " + this + ", which has not yet committed.");
+		}
+		return localInstance;
+	}
+  	
 ## Create attribute set/get methods
 #foreach( $attr in ${object.DeclaredAttributes} )
 #if ("true" != "${object.isReadOnly()}")
@@ -189,7 +201,6 @@ public abstract class ${superClassName} extends ${baseClassName} {
         return obj;
     }
 #end
-
     public $importUtils.formatJavaType(${rel.TargetEntity.ClassName}) ${rel.Name}() {
         return ($importUtils.formatJavaType(${rel.TargetEntity.ClassName}))readProperty("${rel.name}");
     }
