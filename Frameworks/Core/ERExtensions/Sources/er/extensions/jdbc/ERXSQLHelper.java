@@ -2376,7 +2376,8 @@ public class ERXSQLHelper {
 		}
 		
 		public boolean handleDatabaseException(EODatabaseContext databaseContext, Throwable throwable) {
-			if(throwable instanceof EOGeneralAdaptorException) {
+			if(throwable instanceof EOGeneralAdaptorException &&
+					((EOGeneralAdaptorException)throwable).userInfo() != null) {
 				EOGeneralAdaptorException gae = (EOGeneralAdaptorException) throwable;
 				EOAdaptorOperation failedOperation = (EOAdaptorOperation) gae.userInfo().objectForKey(EOAdaptorChannel.FailedAdaptorOperationKey);
 				if(failedOperation != null) {
