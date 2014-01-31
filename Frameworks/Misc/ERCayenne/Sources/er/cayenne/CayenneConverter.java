@@ -22,6 +22,7 @@ import org.apache.cayenne.map.ObjRelationship;
 import org.apache.cayenne.query.SelectQuery;
 import org.apache.cayenne.query.SortOrder;
 import org.apache.cayenne.util.Util;
+import org.apache.cayenne.util.XMLEncoder;
 
 import com.webobjects.eoaccess.EOAttribute;
 import com.webobjects.eoaccess.EOEntity;
@@ -158,7 +159,7 @@ public class CayenneConverter {
 			File sourcesFolder = new File(projectFolder.getAbsolutePath(), "Sources");
 			File newModelFile = new File(sourcesFolder.getAbsolutePath(), model.name() + ".map.xml");
 			PrintWriter writer = new PrintWriter(newModelFile, "UTF8");
-			dataMap.encodeAsXML(writer);
+			dataMap.encodeAsXML(new XMLEncoder(writer));
 			writer.flush();
 			writer.close();
 			
