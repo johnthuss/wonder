@@ -16,7 +16,7 @@
 	<classpathentry kind="lib" path="Libraries/ashwood-2.0.jar"/>
 	<classpathentry kind="lib" path="Libraries/commons-collections-3.1.jar"/>
 	<classpathentry kind="lib" path="Libraries/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="Libraries/cayenne-migrations-3.2M1-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="Libraries/cayenne-server-3.2M2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="Libraries/cayenne-di-3.2.M2-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="Libraries/cayenne-server-3.2.M2-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
