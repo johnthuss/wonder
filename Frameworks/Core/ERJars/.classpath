@@ -14,5 +14,6 @@
 	<classpathentry exported="true" kind="lib" path="Libraries/log4j-1.2.16.jar"/>
 	<classpathentry exported="true" kind="lib" path="Libraries/commons-codec-1.6-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="Libraries/commons-codec-1.6.jar" sourcepath="Libraries/commons-codec-1.6-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="Libraries/servlet-api-3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
