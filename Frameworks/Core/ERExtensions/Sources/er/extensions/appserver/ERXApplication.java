@@ -62,6 +62,7 @@ import com.webobjects.appserver.WOTimer;
 import com.webobjects.appserver._private.WOComponentDefinition;
 import com.webobjects.appserver._private.WODeployedBundle;
 import com.webobjects.appserver._private.WOProperties;
+import com.webobjects.appserver._private.WOWebServicePatch;
 import com.webobjects.eocontrol.EOEditingContext;
 import com.webobjects.eocontrol.EOObserverCenter;
 import com.webobjects.eocontrol.EOTemporaryGlobalID;
@@ -1138,6 +1139,8 @@ public abstract class ERXApplication extends ERXAjaxApplication implements ERXGr
 		
 		ERXStats.initStatisticsIfNecessary();
 
+		WOWebServicePatch.initServer();
+		
 		// WOFrameworksBaseURL and WOApplicationBaseURL properties are broken in 5.4.  
     	// This is the workaround.
 		frameworksBaseURL();
