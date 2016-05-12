@@ -87,14 +87,14 @@ public class ERXRouteController extends WODirectAction {
 	protected static final Logger log = Logger.getLogger(ERXRouteController.class);
 
 	private ERXRouteRequestHandler _requestHandler;
-	private ERXRoute _route;
+	protected ERXRoute _route;
 	private String _entityName;
 	private ERXRestFormat _format;
-	private NSDictionary<ERXRoute.Key, String> _routeKeys;
-	private NSDictionary<ERXRoute.Key, Object> _objects;
-	private EOEditingContext _editingContext;
+	protected NSDictionary<ERXRoute.Key, String> _routeKeys;
+	protected NSDictionary<ERXRoute.Key, Object> _objects;
+	protected EOEditingContext _editingContext;
 	private ERXRestRequestNode _requestNode;
-	private NSKeyValueCoding _options;
+	protected NSKeyValueCoding _options;
 	private NSSet<String> _prefetchingKeyPaths;
 	private boolean _shouldDisposeEditingContext;
 	private ERXRestContext _restContext;

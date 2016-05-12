@@ -67,7 +67,7 @@ public class ERXCachingWrapper extends ERXStatelessComponent {
     	private static final long serialVersionUID = 1L;
 
     	public Object get(Object key) {
-    		Entry result = (Entry) super.get(key);
+    		er.extensions.components.ERXCachingWrapper.Entry result = (er.extensions.components.ERXCachingWrapper.Entry) super.get(key);
     		if(result != null) {
     			if(!result.isActive()) {
     				remove(key);
